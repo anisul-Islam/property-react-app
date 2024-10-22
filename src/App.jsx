@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Properties from './components/Properties';
 
-const properties = [
+const propertiesData = [
   {
     id: 1,
     title: 'Modern Apartment in Downtown',
@@ -40,11 +40,21 @@ const properties = [
 ];
 
 const App = () => {
+  const [properties, setProperties] = useState(propertiesData);
+
+  const handleDeletePropertyById = (id) => {
+    const filterProperties = properties.filter((property) => property.id !== id)
+    setProperties(filterProperties);
+  };
+
   return (
     <div>
       <h1>Real Estate App</h1>
       <h2>A place to find your home</h2>
-      <Properties properties={properties} />
+      <Properties
+        properties={properties}
+        onHandleDeletePropertyById={handleDeletePropertyById}
+      />
     </div>
   );
 };
